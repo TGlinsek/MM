@@ -1,0 +1,2 @@
+find(A==3) - vrne indeks v vec(A), kjer je izpolnjen ta pogoj
+A(A == 3) = -13 - zamenja člene z -13 povsod tam, kjer je pogoj izpolnjen
