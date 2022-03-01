@@ -1,0 +1,11 @@
+plot2(x, y)  % nariše krivuljo, definirano z vektorjema x, y
+plot3(x, y, z)  % nariše krivuljo, definirano z vektorji x, y, z
+surf(X, Y, Z)  % X, Y, Z so matrike enakih dimenzij. Par (x, y, z) 'nariše točko' (x, y, z), pol pa te točke poveže z ravninami
+
+ndgrid(x, y)  % x, y dva vektorja, ne nujno iste dolžine
+meshgrid(x, y)  % zelo podobno kot ndgrid, sam mal slabš, ker so podatki v čudni obliki
+
+% funkcijska koda v matlabu:
+% https://www.mathworks.com/matlabcentral/answers/168998-defining-anonymous-function-using-an-if-statement
+
+A(:) <-> reshape(A, [], 1)
