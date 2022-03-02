@@ -14,6 +14,7 @@ shading interp
 hold off
 % b
 
+%{
 indeks = @(tabela, i) tabela(i)
 
 % grda, toda enovrstična koda (če ne štejemo definicije indeksa zgoraj):
@@ -21,3 +22,14 @@ g = @(x, y) indeks([reshape(f(x, y), 1, []) 1], reshape(1 : numel(f(x, y)), size
 
 surf(A, B, g(A, B))
 shading interp
+%}
+G = f(A, B)
+N = isnan(G)
+G(N) = 1
+
+surf(A, B, G)
+shading interp
+
+% c
+h = @(x) f(x(1), x(2))  % funkcija, ki jo vnašamo v fmincon, mora imeti le en parameter
+y = fmincon(h, [1/2 1/2], [0 0; 0 0], [0 0], [0 0;0 0], [0 0], [0 0], [1 2])
