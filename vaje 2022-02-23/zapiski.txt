@@ -5,7 +5,7 @@ surf(X, Y, Z)  % X, Y, Z so matrike enakih dimenzij. Par (x, y, z) 'nariše toč
 ndgrid(x, y)  % x, y dva vektorja, ne nujno iste dolžine
 meshgrid(x, y)  % zelo podobno kot ndgrid, sam mal slabš, ker so podatki v čudni obliki
 
-% funkcijska koda v matlabu:
+% funkcijska koda v matlabu (ni pomembno):
 % https://www.mathworks.com/matlabcentral/answers/168998-defining-anonymous-function-using-an-if-statement
 
 A(:) <-> reshape(A, [], 1)
