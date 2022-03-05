@@ -1,3 +1,4 @@
+% ni naloga iz vaj
 function [f] = Fibonacci_rek_memo()
     X = [0, 1];
     f = @Fibonacci_rek;
