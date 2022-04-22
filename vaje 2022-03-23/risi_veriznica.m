@@ -5,7 +5,7 @@ function [] = risi_veriznica(zac, L, M)
 
     
 
-    W0 = [1, 1];  % to je verjetno dober začetni približek za [u_0, v_0]
+    W0 = [-1, -1];  % to je verjetno dober začetni približek za [u_0, v_0]
     vozlisca = ver_uv(W0, zac, L, M);  % 2 x (n + 2) matrika
     
     n = length(vozlisca) - 2;

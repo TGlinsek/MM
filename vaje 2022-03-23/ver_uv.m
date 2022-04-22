@@ -19,8 +19,8 @@ function vozlisca = ver_uv(W0, zac, L, M)
     ni = [0, cumsum(mi, 2)]  % seznam dolžine n + 1
     w = @(u, v) v - u * ni  % seznam dolžine n + 1
     
-    U = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2).*w(u, v)) - (x_n_1 - x_0);
-    V = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2)) - (y_n_1 - y_0);
+    U = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2)) - (x_n_1 - x_0);
+    V = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2).*w(u, v)) - (y_n_1 - y_0);
     
 
     U_in_V = @(vekt) [U(vekt(1), vekt(2)); V(vekt(1), vekt(2))];
@@ -30,8 +30,8 @@ function vozlisca = ver_uv(W0, zac, L, M)
     
     priblizek = [u_0, v_0]
     mi
-    rez = Newtonova_metoda(x_0, y_0, x_n_1, y_n_1, L, mi, u_0, v_0);
-    % rez = fsolve(U_in_V, priblizek)
+    % rez = Newtonova_metoda(x_0, y_0, x_n_1, y_n_1, L, mi, u_0, v_0);
+    rez = fsolve(U_in_V, priblizek)
     u = rez(1)
     v = rez(2)
     U_in_V([u, v])
