@@ -1,8 +1,10 @@
 c = @(t) [-cos(t) + 2*cos(t/2); -sin(t) + 2*sin(t/2)];
 
+
 % 1)
 nal(1)
 fprintf("Oddaljenost: %f \n", norm(c(1)))
+
 
 % 2)
 nal(2)
@@ -22,6 +24,7 @@ d = @(t) vecnorm(odvod(t));  % če bi uporabili norm, potem bi bil problem, saj
 fprintf("Dolžina krivulje: %f \n", integral(d, 0, 4*pi));
 % opomba: funkcija 'integral' bo klicala funkcijo z vektorjem vrednosti
 
+
 % 3)
 nal(3)
 
@@ -40,6 +43,7 @@ ploscina_pod_zanko = integral(integrand, ...
     0, 4*pi) / 2;
 
 fprintf("Ploščina zanke: %f \n", ploscina_pod_zanko);
+
 
 % 4)
 nal(4)
@@ -62,6 +66,7 @@ ukrivljenost = @(t) planaren_vekt_prod(odvod(t), drugi_odvod(t))/norm(odvod(t))^
 
 fprintf("Ukrivljenost (z vektorskim produktom): %f \n", ukrivljenost(2*pi));
 
+
 % 5)
 nal(5)
 razdalja = @(t) sum(c(t));
@@ -79,10 +84,12 @@ presecisce2 = c(nicla2);
 fprintf("Prvo presečišče: [%s] \n", join(string(presecisce1), ', '))
 fprintf("Drugo presečišče: [%s] \n", join(string(presecisce2), ', '))
 
+
 % 6)
 nal(6)
 
-c_2 = @(t) (t/4)*[cos(t); sin(t)];
+c_2 = @(t) (t/4).*[cos(t); sin(t)];
+%{
 
 nov_arctan = @(t) pi/2 - atan(1./t);  % malo modificiran, da je zaloga v [0, pi]
 
@@ -93,7 +100,11 @@ seznam = @(t) [c_2(kot(t)), c_2(kot(t) + pi), c_2(kot(t) + 2*pi), c_2(kot(t) + 3
 razdalja = @(t) min(vecnorm(c(t).*ones(1, 4) - seznam(t)));
 
 % ni v redu
-% TODO
+
+%}
+F = @(t) c(t) - c_2(t)
+% fsolve(F)
+
 
 % 7)
 nal(7)
@@ -104,11 +115,20 @@ nicla2 = fzero(y_odvod, [2*pi, 4*pi - 0.0000001]);
 fprintf("Prva vrednost: %f \n", nicla1)
 fprintf("Druga vrednost: %f \n", nicla2)
 
+
 % 8) fminbnd  (analogno fzero)
-% TODO
 nal(8)
 
+% https://www.mathworks.com/matlabcentral/answers/38732-getting-first-element-of-a-function-output
+pridobi_element = @ (matrika, vrstica, stolpec) subsref(matrika, struct('type','()','subs', {{vrstica, stolpec}}));
+
+A = [2; 2];  % naša točka
+razd = @(t) sqrt((A(1) - pridobi_element(c(t), 1, 1))^2 + (A(2) - pridobi_element(c(t), 2, 1))^2);
+
+t_min_razdalja = fminbnd(razd, 0, 4*pi);
+fprintf("Najmanjša razdalja do točke A(2, 2) je %f. \n", razd(t_min_razdalja))
 % lahko pa tut tk, da iščemo, kdaj velja <F^.(t), A - F(t)> = 0
+
 
 % 9) fminsearch  (analogno fsolve)
 nal(9)
@@ -140,9 +160,23 @@ fprintf("Optimalen alfa je: %f \n", alfa)
 % risanje:
 
 t = linspace(0, 4*pi);
-krivulja = c(t);
-plot(krivulja(1, :), krivulja(2, :), 'color', [1 0 0])
-daspect([1 1 1])
+krivulja1 = c(t);
+t2 = linspace(0, 3*pi);
+krivulja2 = c_2(t2);
+
+plot(krivulja1(1, :), krivulja1(2, :), 'color', [1 0 0])
+hold on
+plot(krivulja2(1, :), krivulja2(2, :), 'color', [0 1 0])
+
+tocka = c(t_min_razdalja);
+x = tocka(1);
+y = tocka(2);
+plot(x, y, 'o');  % najbližja točka točki A(2, 2)
+plot(2, 2, 'o');  % točka A(2, 2)
+
+% daspect([1 1 1])
+axis equal  % naredi isto kot daspect, ampak bolje
+
 
 function [rez] = locni_element(alfa)
     global odvod_c_9_nal
