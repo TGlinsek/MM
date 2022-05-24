@@ -6,12 +6,12 @@ function [T] = cas_potovanja_po_premici(T1, T2)
     x2 = T2(1);
     y2 = T2(2);
 
-    g = 9.8;  % gravitacijski pospešek
+    g = 9.81;  % gravitacijski pospešek
 
     naklon = (y2 - y1)/(x2 - x1);
 
     % "dinamična sila", v bistvu njen pospešek
-    dinamicna_sila = g * sin(arctan(abs(naklon)));
+    dinamicna_sila = g * sin(atan(abs(naklon)));
     
     T = cas_iz_pospeska_in_razdalje(dinamicna_sila, sqrt((x1 - x2)^2 + (y1 - y2)^2));
     

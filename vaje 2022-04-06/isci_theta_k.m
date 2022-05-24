@@ -10,8 +10,7 @@ function [k, theta_zvezdica] = isci_theta_k(b, B)
     % intervalu (0, 2pi)
     % splača se vzeti približek, ki je bližje 2pi, da nam iteracija
     % skonvergira k tej ničli in ne k trivialni
-    tol = 0.0001;
-    theta_zvezdica = navadna_iteracija(g, pi, tol);
+    theta_zvezdica = fzero(g, pi);
     
     k = sqrt(2*b/(theta_zvezdica - sin(theta_zvezdica)));
 end
