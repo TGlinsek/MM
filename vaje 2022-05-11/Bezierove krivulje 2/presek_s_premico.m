@@ -14,6 +14,10 @@ function Tp = presek_s_premico(b, l, tol, risanje)
     % seka kontrolni poligon
     % če ga ne seka, potem ne rabimo več gledati
     
+    if nargin < 4
+        risanje = false;
+    end
+
     dolzina = size(b, 2);
 
     premer = norm(b(:, end) - b(:, 1));  % razdalja med prvo in zadnjo točko

@@ -1,3 +1,5 @@
+addpath '..'  % da dobimo dostop do določenih datotek
+
 c = @(t) [-cos(t) + 2*cos(t/2); -sin(t) + 2*sin(t/2)];
 
 
@@ -89,8 +91,8 @@ fprintf("Drugo presečišče: [%s] \n", join(string(presecisce2), ', '))
 nal(6)
 
 c_2 = @(t) (t/4).*[cos(t); sin(t)];
-%{
 
+%{
 nov_arctan = @(t) pi/2 - atan(1./t);  % malo modificiran, da je zaloga v [0, pi]
 
 kot = @(t) nov_arctan(drugi_clen(c(t))/prvi_clen(c(t)));
@@ -102,8 +104,19 @@ razdalja = @(t) min(vecnorm(c(t).*ones(1, 4) - seznam(t)));
 % ni v redu
 
 %}
-F = @(t) c(t) - c_2(t)
-% fsolve(F)
+
+b1 = 4*pi;  % zgornja meja intervala za c
+b2 = 3*pi;  % zgornja meja intervala za c_2
+
+presecisce = presecisce_dveh_krivulj(c, c_2, [0, 0], [b1, b2], [0.1*(b1); 0.7*(b2)]);
+drugo_presecisce = presecisce_dveh_krivulj(c, c_2, [0, 0], [b1, b2], [0.9*(b1); 0.7*(b2)]);
+
+% alternativno:
+% presecisce = presecisce_dveh_krivulj_fsolve(c, c_2, [0, 0], [b1, b2], [0.1*(b1); 0.7*(b2)]);
+% drugo_presecisce = presecisce_dveh_krivulj_fsolve(c, c_2, [0, 0], [b1, b2], [0.9*(b1); 0.7*(b2)]);
+
+fprintf("Prvo presečišče: [%s] \n", join(string(presecisce), ', '))
+fprintf("Drugo presečišče: [%s] \n", join(string(drugo_presecisce), ', '))
 
 
 % 7)
@@ -164,8 +177,9 @@ krivulja1 = c(t);
 t2 = linspace(0, 3*pi);
 krivulja2 = c_2(t2);
 
+figure
 plot(krivulja1(1, :), krivulja1(2, :), 'color', [1 0 0])
-hold on
+hold on, grid on
 plot(krivulja2(1, :), krivulja2(2, :), 'color', [0 1 0])
 
 tocka = c(t_min_razdalja);
