@@ -11,8 +11,8 @@ function [nov_b] = rotiraj_bezier(b, phi, risanje)
     
     
     if risanje
-        figure
-        plotBezier(b)
+        % figure
+        % plotBezier(b)
         hold on
         plotBezier(nov_b)
     end

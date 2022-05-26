@@ -4,6 +4,10 @@ function [b] = C1CubicSpline(u, p, v, risanje)
     assert(size(p, 2) == size(v, 2), "Dolžini seznamov morata biti enaki!")
     assert(size(u, 2) == N + 1)
     
+    if nargin < 4
+        risanje = false;
+    end
+
     b = [];
     for i = 1 : N
         b(:, end + 1) = p(:, i);
