@@ -21,6 +21,11 @@ delta_U = -1;  % tu si izberemo poljubno negativno število (pač, odvisno, kak�
 
 cas_numericno = integral(@(t) ones(1, length(t)).*sqrt(1 + y_^2)/sqrt((2/m)*(-delta_U)), x1, x2)
 
-% seveda pa se ta izraz poenostavi v
+% seveda pa se ta izraz poenostavi v:
 
 cas_analiticno = sqrt(m*(1 + y_^2))/sqrt(-2*delta_U)*(x2 - x1)
+
+% opomba: v izrazu se pojavi (x2 - x1)*sqrt(1 + y_^2), ki pa ravno
+% predstavlja dolžino premice od točke T1 do T2
+% torej je čas kar dolžina premice krat konstanta (seveda pa to velja le v 
+% takem vesolju, kjer potencial neodvisen od višine)

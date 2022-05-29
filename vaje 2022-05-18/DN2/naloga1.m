@@ -1,4 +1,5 @@
 addpath '..\..\vaje 2022-04-06'
+addpath '..\..'
 
 %{
 Predpostavimo, da je gravitacijski pospešek g konstantno enak 9.81. Določite brahistohrono k med točkama T0=[1,5]⊤ in T1=[6,2]⊤. Začetna hitrost kroglice je 0, trenja na krivulji ni.
@@ -44,7 +45,7 @@ Kolikšna je največja hitrost kroglice na krivulji k?
 
 najnizja_ordinata = y0;
 razlika_visine = y0 - T0(2);
-v = sqrt(-2*g*razlika_visine)
+v = sqrt(-2*g*razlika_visine);
 % namreč, velja v = sqrt(-2*g*y(x))
 nal(3, v)
 
@@ -78,7 +79,7 @@ nal(4, norm(T2))
 Določite potencialno polje ΔU=ΔU(y), da bo posplošena brahistohrona ravno krivulja x3+y3=R. Naj velja R=3 in ΔU(−1)=−0.062602467658770. Koliko je ΔU(−2)?
 %}
 clear
-R = 3;
+R = 8;
 
 % ΔU(y) bo vedno <= 0
 
@@ -90,9 +91,16 @@ R = 3;
 % dy = y'dx
 % dy/dx = -x^2/y^2
 
+% ampak prav je:
+% y' = -1/(R - x^3)^(2/3)*x^2
+% torej 
+
 y_ = @(y) -na_2_3(R - y^3)/y^2;
+
 % a = @(x) - x^2/na_2_3(R - x^3);
 % y_ = @(y) a(na_1_3(R - y^3));
+
+% no, izkaže se, da sta obe dve definiciji y' enakovredni
 
 % velja: delta_U(y) = -A/(y_^2 + 1), za nek A > 0
 
