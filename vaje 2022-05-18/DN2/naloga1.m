@@ -76,7 +76,7 @@ nal(4, norm(T2))
 
 % 5)
 %{
-Določite potencialno polje ΔU=ΔU(y), da bo posplošena brahistohrona ravno krivulja x3+y3=R. Naj velja R=3 in ΔU(−1)=−0.062602467658770. Koliko je ΔU(−2)?
+Določite potencialno polje ΔU=ΔU(y), da bo posplošena brahistohrona ravno krivulja x3+y3=R. Naj velja R=8 in ΔU(−1)=−0.062602467658770. Koliko je ΔU(−2)?
 %}
 clear
 R = 8;

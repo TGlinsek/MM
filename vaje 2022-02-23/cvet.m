@@ -10,5 +10,6 @@ function [] = cvet(a, b, n)
         plot(A(1, 1:end), A(2, 1:end));
     end
     hold off
+    axis equal
 end
 

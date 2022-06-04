@@ -1,4 +1,4 @@
-function [nov_b_xs, nov_b_ys] = razsirjen_deCasteljau(b, l, t)
+function [nov_b_xs, nov_b_ys] = delni_deCasteljau(b, l, t)
     % vrne točke pri l-tem koraku deCasteljauja
     % b je kontrolni poligon
     % t je točka, v kateri računamo. Lahko je tudi vektor točk. V tem

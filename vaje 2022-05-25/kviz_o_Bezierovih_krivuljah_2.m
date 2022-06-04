@@ -1,6 +1,7 @@
 addpath '..\vaje 2022-05-11'
 addpath '..\vaje 2022-05-11\Bezierove krivulje 1'
 addpath '..\vaje 2022-05-11\Bezierove krivulje 2'
+addpath '..'
 
 seme = 816;
 rand('seed', seme);
@@ -15,7 +16,7 @@ nal(1, c_0_5(1))
 % 1.825134350429352
 
 % 2)
-nal(2, norm(odvod(c, 1, 0.5)))
+nal(2, norm(odvod_Bez(c, 1, 0.5)))
 % 4.413018274302452
 
 % 3)

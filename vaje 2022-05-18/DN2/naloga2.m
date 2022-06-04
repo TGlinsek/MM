@@ -52,7 +52,7 @@ f = @(t) deCasteljau(bC, t');  % transponiramo, ker integral deluje tako, da pod
 % ampak deCasteljau je narejen tako, da so vrednosti po vrsticah, ne pa po
 % stolpcih
 
-odvod_f = @(t) odvod(bC, 1, t');
+odvod_f = @(t) odvod_Bez(bC, 1, t');
 
 locni_el = @(t) sqrt(prvi(odvod_f(t)).^2 + drugi(odvod_f(t)).^2);
 
@@ -68,7 +68,7 @@ nal(3, abscisa_tezisca)
 Ordinato četrte kontrolne točke krivulje b določite tako, da bo dolžina krivulje b čim manjša. Kolikšna je dolžina optimalne krivulje b? (Nasvet: Pri iskanju minimuma si pomagajte z metodo fminsearch.)
 %}
 
-odvod_f = @(b, t) odvod(b, 1, t');
+odvod_f = @(b, t) odvod_Bez(b, 1, t');
 
 locni_el = @(b, t) sqrt(prvi(odvod_f(b, t)).^2 + drugi(odvod_f(b, t)).^2);
 dolzina_krivulje = @(b) integral(@(t) locni_el(b, t), 0, 1);
@@ -87,8 +87,8 @@ nal(4, komp(y))
 Originalno krivuljo b reparametriziramo v naravnem parametru s. Novo krivuljo (ki ni Bezierjeva krivulja) označimo s c=c(s), ki ima enako tirnico kot b. Določite vektor c′′(3). Koliko je x-komponenta vektorja?
 %}
 
-odvod_f = @(t) odvod(bC, 1, t');
-drugi_odvod_f = @(t) odvod(bC, 2, t');
+odvod_f = @(t) odvod_Bez(bC, 1, t');
+drugi_odvod_f = @(t) odvod_Bez(bC, 2, t');
 
 locni_el = @(t) sqrt(prvi(odvod_f(t)).^2 + drugi(odvod_f(t)).^2);
 
@@ -97,8 +97,8 @@ d = @(t) integral(@(t_) locni_el(t_), 0, t);
 % inverz_d = @(t) fzero(@(x) d(x) - t, 0);
 inverz_d = inverz(d);
 
-b_ = @(t) odvod(bC, 1, t);
-b__ = @(t) odvod(bC, 2, t);
+b_ = @(t) odvod_Bez(bC, 1, t);
+b__ = @(t) odvod_Bez(bC, 2, t);
 
 d_ = @(t) locni_el(t);
 d__ = @(t) (prvi(odvod_f(t))*prvi(drugi_odvod_f(t)) + drugi(odvod_f(t))*drugi(drugi_odvod_f(t)))/d_(t);  % odvod ločnega elementa: ga izpeljemo analitično

@@ -13,7 +13,7 @@ fprintf("Abscisa točke: %.15f \n", tocka(1))
 
 % 2)
 nal(2)
-prvi_odvod = odvod(b, 1, 0.5);
+prvi_odvod = odvod_Bez(b, 1, 0.5);
 
 fprintf("Norma odvoda: %.15f \n", norm(prvi_odvod))
 % 4.038873605350878
@@ -27,7 +27,7 @@ fprintf("Razdalja do izhodišča: %.15f \n", norm(deCasteljau(b, 0.5)))
 
 % 4)
 nal(4)
-drugi_odvod = odvod(b, 2, 0.5);
+drugi_odvod = odvod_Bez(b, 2, 0.5);
 
 ukrivljenost = (prvi_odvod(1).*drugi_odvod(2) - prvi_odvod(2).*drugi_odvod(1))/(prvi_odvod(1).^2 + prvi_odvod(2).^2).^(3/2);
 fprintf("Predznačena ukrivljenost: %.15f \n", ukrivljenost)
@@ -60,7 +60,7 @@ fprintf("Vsota abscis kontrolnih točk krivulje zvišane stopnje je %f \n", sum(
 
 % 8)
 nal(8)
-naklon_tangente = @(t) el(odvod(b, 1, t), 2, 1);
+naklon_tangente = @(t) el(odvod_Bez(b, 1, t), 2, 1);
 nicla = fzero(naklon_tangente, [0 1]);  % [0 1] je interval iskanja
 fprintf("Tangentni vektor je z absciso vzporeden pri t = %.15f \n", nicla)
 % 0.366025403784439
