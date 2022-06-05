@@ -1,4 +1,4 @@
-function [k, theta_zvezdica] = transformacija(T1, T2)
+function [b, B] = transformacija(T1, T2)
     % T1 = [x1, y1]
     % T2 = [x2, y2]
 
@@ -11,6 +11,6 @@ function [k, theta_zvezdica] = transformacija(T1, T2)
     b = x2 - x1;
     B = y2 - y1;
 
-    [k, theta_zvezdica] = isci_theta_k(b, B);
+    % [k, theta_zvezdica] = isci_theta_k(b, B);
 end
 

@@ -5,19 +5,16 @@ function [T, koncna_hitrost] = cas_potovanja_po_premici(T1, T2, zac_hitrost)
         zac_hitrost = 0;
     end
 
-    x1 = T1(1);
-    y1 = T1(2);
-    x2 = T2(1);
-    y2 = T2(2);
+    [b, B] = transformacija(T1, T2);
 
     g = 9.81;  % gravitacijski pospešek
 
-    naklon = (y2 - y1)/(x2 - x1);
+    naklon = B/b;
 
     % "dinamična sila", v bistvu njen pospešek
     dinamicna_sila = g * sin(atan(abs(naklon)));
     
-    razdalja = sqrt((x1 - x2)^2 + (y1 - y2)^2);
+    razdalja = sqrt(b^2 + B^2);
 
     if razdalja == 0
         T = 0;

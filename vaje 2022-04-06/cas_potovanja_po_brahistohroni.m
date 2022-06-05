@@ -5,5 +5,9 @@ function [T] = cas_potovanja_po_brahistohroni(T1, T2)
 
     [k, theta_zvezdica] = transformacija(T1, T2);
     
-    T = (k/sqrt(2*g)) * theta_zvezdica;
+    T = k/sqrt(2*g) * theta_zvezdica;
+
+    % opomba: če hočemo zračunati čas potovanja po brahistohroni do neke
+    % thete (0 <= theta <= theta_zvezdica), potem velja
+    % T = k/sqrt(2*g) * theta
 end

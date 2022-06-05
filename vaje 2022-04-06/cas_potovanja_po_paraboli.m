@@ -6,14 +6,7 @@ function [T] = cas_potovanja_po_paraboli(T1, T2)
 
     g = 9.81;
 
-    x1 = T1(1);
-    y1 = T1(2);
-    x2 = T2(1);
-    y2 = T2(2);
-
-    % transformacija:
-    b = x2 - x1;
-    B = y2 - y1;
+    [b, B] = transformacija(T1, T2);
     
     a = B/b^2;
     y = @(x) -a*(x - b).^2 + B;
