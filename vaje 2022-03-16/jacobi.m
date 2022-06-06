@@ -1,4 +1,4 @@
-function U = jacobi(U, tol)
+function U = jacobi(U, tol, a)
     % U je matrika (n + 2) × (n + 2)
     % U ima v notranjosti ničle, na robu pa vrednosti
     % število podintervalov: n + 1
@@ -12,12 +12,13 @@ function U = jacobi(U, tol)
 
     st_iteracij = 0;
 
-    x = linspace(0, 1, n + 2);
-    y = linspace(0, 1, n + 2);
+    x = linspace(-a, a, n + 2);
+    y = linspace(-a, a, n + 2);
 
-    [X, Y] = ndgrid(x, y);
+    [X, Y] = meshgrid(x, y);
     
-
+    colormap(jet)  % živahne barve
+    
     while razlika >= tol
         % zamaknemo matrike
         % prazna mesta zapolnimo z nani
@@ -37,14 +38,17 @@ function U = jacobi(U, tol)
     
         razlika = max(max(abs(U - U2)));  % največja razlika v tem koraku
         U = U2;
-
         
-        surf(X, Y, U);
-        pause(1)
+        surf(X, Y(end:-1:1, :), U);
+
+        xlabel('x')
+        ylabel('y')
+
+        pause(0.01)
         % shading interp
 
         st_iteracij = st_iteracij + 1;
     end
-    fprintf("Opravljenih je bilo %d iteracij.", st_iteracij)
+    fprintf("Opravljenih je bilo %d iteracij.\n", st_iteracij)
 end
 

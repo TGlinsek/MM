@@ -1,4 +1,4 @@
-function U = gauss_seidl(U, tol, sprotno_risanje)
+function U = gauss_seidel(U, tol, a)
     % U je matrika (n + 2) × (n + 2)
     % U ima v notranjosti ničle, na robu pa vrednosti
     % število podintervalov: n + 1
@@ -12,10 +12,12 @@ function U = gauss_seidl(U, tol, sprotno_risanje)
 
     st_iteracij = 0;
 
-    x = linspace(0, 1, n + 2);
-    y = linspace(0, 1, n + 2);
+    x = linspace(-a, a, n + 2);
+    y = linspace(-a, a, n + 2);
 
-    [X, Y] = ndgrid(x, y);
+    [X, Y] = meshgrid(x, y);
+    
+    colormap(jet)  % živahne barve
 
     while razlika >= tol
 
@@ -32,12 +34,16 @@ function U = gauss_seidl(U, tol, sprotno_risanje)
         razlika = vmesna_razlika;
 
 
-        surf(X, Y, U);
-        pause(1)
+        surf(X, Y(end:-1:1, :), U);
+        
+        xlabel('x')
+        ylabel('y')
+
+        pause(0.01)
         % shading interp
 
         st_iteracij = st_iteracij + 1;
     end
-    fprintf("Opravljenih je bilo %d iteracij.", st_iteracij)
+    fprintf("Opravljenih je bilo %d iteracij.\n", st_iteracij)
 end
 
