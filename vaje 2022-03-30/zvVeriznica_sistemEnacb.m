@@ -6,6 +6,10 @@ function [C, D, lambda] = zvVeriznica_sistemEnacb(T1, T2, l, tol)
     % Izhod:
     % rešitve našega sistema treh enačb
 
+    if nargin < 4
+        tol = toleranca();
+    end
+
     a = T1(1);
     A = T1(2);
     b = T2(1);

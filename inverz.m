@@ -7,7 +7,7 @@ function [inverzna_funkcija] = inverz(f, priblizek_x)
 
     % inverzna_funkcija = @(y) fzero(@(x) f(x) - y, priblizek_x);
     % inverzna_funkcija = @(y) fsolve(@(x) f(x) - y, priblizek_x);  % ne deluje najboljš
-    
+    f  % sam zato, da crasha, če ne vnesemo parametrov
     if nargin < 2
         inverzna_funkcija = @(y) dejanski_inverz(f, y);
     else

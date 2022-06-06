@@ -13,6 +13,14 @@ function [y, y_] = feliks(g, ro_z, c_u, S, m, n, t_K, zacetna_visina, zacetna_hi
     % t_0 je ponavad kr enak 0
     t_0 = 0;  % če to spremeniš, je še treba popravit začetne pogoje pri reševanju dif enačbe, če hočeš nastavit y(t_0) in y'(t_0)
     % če pa rabiš sam y(0) in y'(0), potem pa ni treba skrbeti
+    
+    if isa(g, 'double')
+        g = @(y) g;
+    end
+
+    if isa(ro_z, 'double')
+        ro_z = @(y) ro_z;
+    end
 
     if nargin < 10
         risanje = false;

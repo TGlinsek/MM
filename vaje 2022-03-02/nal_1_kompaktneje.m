@@ -2,15 +2,14 @@
 % y'(0) = 0
 
 g_0 = 9.81;
-ro = 1.225;
+ro_z = 1.225;
 c_u = 1;
 S = 1.2;
 m = 105;
 
 t_K = 300;
 
-g = @(y) g_0;
-ro_z = @(y) ro;
+g = g_0;
 
 [~, y_] = feliks(g, ro_z, c_u, S, m, 10000, t_K, 40000, 0, true);
 
@@ -23,10 +22,10 @@ fprintf('Povprečna hitrost pride %.15f m/s.\n', povp_hitrost)  % zaokroži na 1
 % v limiti se bo hitrost ustalila na neki vrednosti, torej je pospešek 0
 % torej je y'' = 0
 % zdaj pa čist algebraično (ne numerično) rešimo enačbo, da izrazimo y'
-% pride y'*abs(y') = -g_0/(ro * c_u * S/(2*m))
+% pride y'*abs(y') = -g_0/(ro_z * c_u * S/(2*m))
 % desna stran je negativna, torej bo y' negativen (no, to smo že vedeli)
-% torej y' = -sqrt(g_0/(ro * c_u * S/(2*m)))
-y_ = -sqrt(g_0/(ro * c_u * S/(2*m)));
+% torej y' = -sqrt(g_0/(ro_z * c_u * S/(2*m)))
+y_ = -sqrt(g_0/(ro_z * c_u * S/(2*m)));
 fprintf('Limitna hitrost pride %.15f m/s.\n', y_)
 % pride -37.435659089009924
 

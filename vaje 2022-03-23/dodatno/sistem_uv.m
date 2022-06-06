@@ -13,7 +13,7 @@ function Z = sistem_uv(W, zac, L, vsote_mi)
     assert(length(vsote_mi) == n + 1, "vsote_mi mora biti dolžine %d", n + 1);
     
     % ni = [0, cumsum(mi, 2)];  % seznam dolžine n + 1
-    ni = vsote_mi
+    ni = vsote_mi;
     w = @(u, v) v - u * ni;  % seznam dolžine n + 1
     
     U = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2).*w(u, v)) - (x_n_1 - x_0);

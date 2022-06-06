@@ -10,6 +10,9 @@ function [z] = zvVeriznica_iteracijskaFun(T1, T2, l, z_0, tol)
     % z: numerična rešitev enačbe z = asinh(ro*z),
     % kjer ro konstanta, kot je definirana spodaj
 
+    if nargin < 5
+        tol = toleranca();
+    end
     
     % lahko bi dobili a, b, A, B:
     % a = T1(1)

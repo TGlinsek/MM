@@ -22,8 +22,8 @@ mi = pomozna_spr(2:end - 1);  % seznam dolžine n
 
 rez = Newtonova_metoda(x_0, y_0, x_n_1, y_n_1, L, mi, u_0, v_0);
 
-u = rez(1)
-v = rez(2)
+u = rez(1);
+v = rez(2);
 
 ni = [0, cumsum(mi, 2)];  % seznam dolžine n + 1
 w = @(u, v) v - u * ni;  % seznam dolžine n + 1
