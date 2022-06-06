@@ -30,6 +30,7 @@ povp_hitrost = sum(y_)/length(y_);  % length(y_) je 10000
 fprintf('Povprečna hitrost pride %.15f m/s.\n', povp_hitrost)  % zaokroži na 15 decimalnih mest, + 2 mesti pred piko
 % pride -37.103943921425703
 
+
 % 2)
 % v limiti se bo hitrost ustalila na neki vrednosti, torej je pospešek 0
 % torej je y'' = 0
@@ -40,6 +41,7 @@ fprintf('Povprečna hitrost pride %.15f m/s.\n', povp_hitrost)  % zaokroži na 1
 y_ = -sqrt(g_0/(ro_z * c_u * S/(2*m)));
 fprintf('Limitna hitrost pride %.15f m/s.\n', y_)
 % pride -37.435659089009924
+
 
 % 3)
 r = 6371 * 1000;
@@ -61,6 +63,7 @@ plot(t, y_)
 %}
 fprintf("Višina padalca po %d sekundah je %.15d metrov.\n", t_K, y(end))
 % pride 2.892887963680784 * 10^4
+
 
 % 4)
 visine = [0 : 2000 : 10000, 15000 : 5000 : 30000, 40000];
@@ -94,7 +97,8 @@ plot(t, y_)
 %}
 fprintf("Višina padalca po %d sekundah je %.15d metrov.\n", t_K, y(end))
 % pride             4.226372472678795e+03
-% reštev iz vaj je  4.226372472678798e+03
+% rešitev iz vaj je  4.226372472678798e+03
+
 
 % 5
 t_K = 30;
@@ -110,12 +114,13 @@ hitrost_z_odrivom = y_(end);
 % y = y_in_y_(:, 1);
 y_ = y_in_y_(:, 2);
 
-fprintf("Razlika hitrosti padalca po %d sekundah glede na skok brez odriva je %.15f m/s.\n", t_K, hitrost_z_odrivom - y_(end))
+hitrost_brez_odriva = y_(end);
+
+fprintf("Razlika hitrosti padalca po %d sekundah glede na skok brez odriva je %.15f m/s.\n", t_K, hitrost_z_odrivom - hitrost_brez_odriva)
 % pride -2.251586442889391 m/s
 
+
 % 6
-
-
 fun2 = @(x) (fun1(x, F) + 300);  % iščemo hitrost -300
 T = fzero(fun2, 30);
 fprintf("Hitrost 300 m/s padalec doseže po %.14f sekundah.\n", T)
