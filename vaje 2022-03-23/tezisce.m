@@ -12,8 +12,8 @@ function [tez_x, tez_y, potencialna_energija] = tezisce(vozlisca, M)
     tezisca_y = ([T1(2), vozlisca_y] + [vozlisca_y, T2(2)])/2;
     tezisca_y = tezisca_y(2 : end - 1);
     
-    tez_x = sum(M.*tezisca_x)/M;
-    tez_y = sum(M.*tezisca_y)/M;
+    tez_x = sum(M.*tezisca_x)/sum(M);
+    tez_y = sum(M.*tezisca_y)/sum(M);
 
     potencialna_energija = g*sum(M.*tezisca_y);
 end
