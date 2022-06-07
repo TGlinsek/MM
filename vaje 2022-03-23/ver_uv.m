@@ -38,7 +38,7 @@ function vozlisca = ver_uv(W0, zac, L, M)
 
     ksi = L./sqrt(1 + w(u, v).^2);  % seznam dolžine n + 1
     ni = ksi.*w(u, v);
-    ksi
+    ksi;
     
     x = x_0 + [0, cumsum(ksi, 2)];
     y = y_0 + [0, cumsum(ni, 2)];

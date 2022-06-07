@@ -1,0 +1,16 @@
+Dolžina loka, ploščina izseka, prostornina in površina vrtenine (okrog x osi):
+
+- parametrično podane krivulje:
+
+s = integral(sqrt(x_(t)^2 + y_(t)^2))
+p = (1/2)*integral(x(t)*y_(t) - y(t)*x_(t))
+V = pi*integral(y(t)^2*x_(t))
+P = 2*pi*integral(y(t)*sqrt(x_(t)^2 + y_(t)^2))
+
+
+- krivulje podane v polarnih koordinatah:
+
+s = integral(sqrt(r(t)^2 + r_(t)^2))
+p = (1/2)*integral(r(t)^2)
+V = pi*integral(r(t)^2*sin(t)^2*(r_(t)*cos(t) - r(t)*sin(t)))
+P = 2*pi*integral(r(t)*sin(t)*sqrt(r(t)^2 + r_(t)^2))
