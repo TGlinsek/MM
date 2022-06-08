@@ -17,9 +17,17 @@ function [x] = upogib_opne(f, R, n)
     
     x = tridiagonalen_linearen_sistem(D, P, N, h^2*f_tocke);
 
+    %{
+    % 2d graf
     figure
     plot([-R, -ekvidist_tocke(end:-1:2), ekvidist_tocke, R], [0, x(end:-1:2)', x', 0]'')
     hold on
     plot([-R, R], [0, 0])
-end
+    %}
 
+
+    % 3d graf
+    figure
+    f = [x; 0];
+    risi_polarno_3d(f, 0, R, 0, 2*pi)
+end
