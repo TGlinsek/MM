@@ -3,8 +3,10 @@ function [T] = cas_potovanja_po_brahistohroni(T1, T2)
     
     g = 9.81;  % gravitacijski pospešek
 
-    [k, theta_zvezdica] = transformacija(T1, T2);
+    [b, B] = transformacija(T1, T2);
+    [k, theta_zvezdica] = isci_theta_k(b, B);
     
+
     T = k/sqrt(2*g) * theta_zvezdica;
 
     % opomba: če hočemo zračunati čas potovanja po brahistohroni do neke
