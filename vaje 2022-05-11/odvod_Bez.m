@@ -3,7 +3,11 @@ function [odvod, nov_b_xs, nov_b_ys] = odvod_Bez(b, k, t)
     % v točkah t
 
     assert(size(b, 1) == 2, "b mora imeti natanko dve vrstici!")
-    assert(size(t, 2) == 1, "t mora biti vektor!")
+    assert(size(t, 2) == 1 || size(t, 1) == 1, "t mora biti vektor!")
+    if size(t, 1) == 1
+        t = t';
+    end
+    
     % s = length(t);
 
     n = size(b, 2) - 1;

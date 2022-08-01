@@ -4,7 +4,11 @@ function [nov_b_xs, nov_b_ys] = delni_deCasteljau(b, l, t)
     % t je točka, v kateri računamo. Lahko je tudi vektor točk. V tem
     % primeru pač 'ponovimo' ta algoritem za več različnih t-jev
     
-    assert(length(t'*t) == 1, "t bi moral biti vektor!")
+    assert(length(t'*t) == 1  || length(t*t') == 1, "t bi moral biti vektor!")
+    if length(t*t') == 1
+        t = t';
+    end
+    
     assert(length(b*b') == 2, "stolpci b-ja morajo biti točke (tj. velikosti 2)!")
 
     n = length(b'*b) - 1;  % št kontrolnih točk

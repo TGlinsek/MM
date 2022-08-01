@@ -10,7 +10,11 @@ function [tocke, xs, ys] = deCasteljau(b, t)
     % za optimizacijo spomina bomo prejšnje stolpce v trikotni shemi
     % kar čez prepisali
 
-    assert(length(t'*t) == 1, "t bi moral biti vektor!")
+    assert(length(t'*t) == 1 || length(t*t') == 1, "t bi moral biti vektor!")
+    if length(t*t') == 1
+        t = t';
+    end
+    
     assert(length(b*b') == 2, "stolpci b-ja morajo biti točke (tj. velikosti 2)!")
 
     n = length(b'*b) - 1;  % št kontrolnih točk
