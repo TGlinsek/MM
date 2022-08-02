@@ -4,7 +4,7 @@ function presecisce = presecisce_dveh_krivulj_fsolve(p, q, sp_meja, zg_meja, X_0
     % vrne eno presecisce
 
     if nargin < 7
-        options = optimset('TolFun', 1e-16);
+        options = optimset('TolFun', 1e-16, 'Display','off');
     end
 
     if nargin < 6
@@ -22,7 +22,7 @@ function presecisce = presecisce_dveh_krivulj_fsolve(p, q, sp_meja, zg_meja, X_0
 
     
     razd = @(x) p(x(1)) - q(x(2));
-    % options = optimset('TolFun', 1e-5);
+    % options = optimset('TolFun', 1e-5, 'Display','off');
     X = fsolve(razd, X_0, options);
     
     presecisce = p(X(1));  % lahko tudi q(X(2))

@@ -29,11 +29,11 @@ function [rezultat] = inverz(f, priblizek_x, y0)
         f(priblizek_x(1, 1));  % če je tu error, potem se dimenzija približka ne ujema z dimenzijo pričakovanega parametra funkcije f
         assert(size(priblizek_x, 1) == 2, "Priblizek_x mora imeti le eno ali pa dve vrstici (če nastavljamo interval iskanja ničle).")
         pogoj_je_interval = true;
-        fprintf("\nKot pogoj ste podali interval! \n")
+        % fprintf("\nKot pogoj ste podali interval! \n")
     catch
         f(priblizek_x(:, 1));  % če je tu error, potem se dimenzija približka ne ujema z dimenzijo pričakovanega parametra funkcije f
         % pogoj_je_interval = false;  % je že false tukaj
-        fprintf("\nKot pogoj ste podali vrednost! \n")
+        % fprintf("\nKot pogoj ste podali vrednost! \n")
     end
     inverzna_funkcija = @(y) dejanski_inverz(f, y, priblizek_x, pogoj_je_interval);
 
@@ -68,13 +68,16 @@ function x = dejanski_inverz(f, y, priblizek_x, pogoj_je_interval)
             x(:, i) = fzero(@(x) f(x) - y(:, i), priblizek_x(:, i)');
         end
         %}
-        x = razbijalec(@(y) fzero(@(x) f(x') - y, priblizek_x), y);
+        x = razbijalec(@(y) fzero(@(x) f(x') - y, priblizek_x), y);  % če je napaka tukaj, potem morda inverz v tej točki ne obstaja
+        % specifično, če je ta napaka "Function values at the interval
+        % endpoints must differ in sign.", potem inverz ne obstaja
     else
         %{
         for i = 1 : n
             x(:, i) = fsolve(@(x) f(x) - y(:, i), priblizek_x(:, i));
         end
         %}
-        x = razbijalec(@(y) fsolve(@(x) f(x) - y, priblizek_x), y);
+        options = optimset('Display','off');
+        x = razbijalec(@(y) fsolve(@(x) f(x) - y, priblizek_x), y, options);
     end
 end

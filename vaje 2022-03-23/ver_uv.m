@@ -29,16 +29,16 @@ function vozlisca = ver_uv(W0, zac, L, M)
     v_0 = W0(2);
     
     priblizek = [u_0, v_0];
-    mi;
+    
     % rez = Newtonova_metoda(x_0, y_0, x_n_1, y_n_1, L, mi, u_0, v_0);
-    rez = fsolve(U_in_V, priblizek);
+    options = optimset('Display','off');
+    rez = fsolve(U_in_V, priblizek, options);
     u = rez(1);
     v = rez(2);
     U_in_V([u, v]);
 
     ksi = L./sqrt(1 + w(u, v).^2);  % seznam dolžine n + 1
     ni = ksi.*w(u, v);
-    ksi;
     
     x = x_0 + [0, cumsum(ksi, 2)];
     y = y_0 + [0, cumsum(ni, 2)];

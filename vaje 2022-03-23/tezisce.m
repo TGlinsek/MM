@@ -1,6 +1,7 @@
 function [tez_x, tez_y, potencialna_energija] = tezisce(vozlisca, M)
     g = 9.81;
-    
+    assert(size(vozlisca, 2) == size(M, 2) + 1, "Vozlišča morajo vsebovati tudi obe obesišči.")
+
     T1 = vozlisca(:, 1);
     T2 = vozlisca(:, end);
     vozlisca_x = vozlisca(1, :);
@@ -14,7 +15,7 @@ function [tez_x, tez_y, potencialna_energija] = tezisce(vozlisca, M)
     
     tez_x = sum(M.*tezisca_x)/sum(M);
     tez_y = sum(M.*tezisca_y)/sum(M);
-
+    
     potencialna_energija = g*sum(M.*tezisca_y);
 end
 
