@@ -30,9 +30,12 @@ function vozlisca = ver_uv(W0, zac, L, M)
     
     priblizek = [u_0, v_0];
     
-    % rez = Newtonova_metoda(x_0, y_0, x_n_1, y_n_1, L, mi, u_0, v_0);
+    % addpath 'dodatno'
+    % rez = Newtonova_metoda(x_0, y_0, x_n_1, y_n_1, L, mi, u_0, v_0, n, w, ni, U, V);
+    
     options = optimset('Display','off');
     rez = fsolve(U_in_V, priblizek, options);
+    
     u = rez(1);
     v = rez(2);
     U_in_V([u, v]);
@@ -42,6 +45,18 @@ function vozlisca = ver_uv(W0, zac, L, M)
     
     x = x_0 + [0, cumsum(ksi, 2)];
     y = y_0 + [0, cumsum(ni, 2)];
+    
+    if abs(y(end) - y_n_1) >= 0.001
+        fprintf("Y-koordinata zadnjega vozlišča se ne ujema z dejansko! Namesto Newtonove metode raje uporabi kar fsolve.\n")
+        fprintf("Izračunan: %f\n", y(end))
+        fprintf("Dejanski:  %f\n", y_n_1)
+    end
+    if abs(x(end) - x_n_1) >= 0.001
+        fprintf("X-koordinata zadnjega vozlišča se ne ujema z dejansko! Namesto Newtonove metode raje uporabi kar fsolve.\n")
+        fprintf("Izračunan: %f\n", x(end))
+        fprintf("Dejanski:  %f\n", x_n_1)
+    end
+
     vozlisca = [x; y];
     
 end
