@@ -15,7 +15,7 @@ g = 9.81;
 Kolikšen je čas potovanja kroglice od T0 do T1 po krivulji k?
 %}
 
-nal(1, cas_potovanja_po_brahistohroni(T0, T1))
+nal(1, cas_potovanja_po_brahistohroni(T0, T1))  % pride 1.265934630996953
 
 
 % 2)
@@ -31,7 +31,7 @@ T_0_5 = [3; 2];
 [t1, koncna_hitrost_1] = cas_potovanja_po_premici(T0, T_0_5);
 t2 = cas_potovanja_po_premici(T_0_5, T1, koncna_hitrost_1);
 
-nal(2, t1 + t2)
+nal(2, t1 + t2)  % pride 1.330952354898036
 
 
 % 3)
@@ -47,7 +47,8 @@ najnizja_ordinata = y0;
 razlika_visine = y0 - T0(2);
 v = sqrt(-2*g*razlika_visine);
 % namreč, velja v = sqrt(-2*g*y(x))
-nal(3, v)
+nal(3, v)  % pride 7.680219032262394
+
 
 % alternativno:
 %{
@@ -71,7 +72,7 @@ assert(t >= 0, "Čas mora biti nenegativen")
 
 T2 = [x(t); y(t)];
 plot(T2(1), T2(2), 'o')
-nal(4, norm(T2))
+nal(4, norm(T2))  % pride 8.063702792738658
 
 
 % 5)
@@ -107,7 +108,8 @@ y_ = @(y) -na_2_3(R - y^3)/y^2;
 A = pridobi_A(y_, -1, -0.062602467658770);
 delta_U = @(y) -A/(y_(y)^2 + 1);
 
-nal(5, delta_U(-2))
+nal(5, delta_U(-2))  % -0.350745247939887
+
 
 function A = pridobi_A(y_, y, delta_U_v_y)
     % delta_U_v_y je pač delta_U(y) 

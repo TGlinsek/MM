@@ -23,7 +23,7 @@ function presecisce = presecisce_dveh_krivulj(p, q, sp_meja, zg_meja, X_0, risan
     assert(size(zg_meja, 1) == 1, "zgornja meja mora biti seznam")
     
     razd = @(x) norm(p(x(1)) - q(x(2)));
-    options = optimoptions('fmincon', 'StepTolerance', 1e-5);  % včasih je treba toleranco znižat
+    options = optimoptions('fmincon', 'StepTolerance', 1e-16);  % včasih je treba toleranco znižat
     % options = optimset('TolFun', 1e-16);
     X = fmincon(razd, X_0', [0 0; 0 0], [0 0], [0 0; 0 0], [0 0], sp_meja, zg_meja, [], options);
     % tudi pri fmincon je dober začetni približek ključen

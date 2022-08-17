@@ -7,6 +7,8 @@ c = @(t) [-cos(t) + 2*cos(t/2); -sin(t) + 2*sin(t/2)];
 nal(1)
 fprintf("Oddaljenost: %f \n", norm(c(1)))
 
+% dobljena rešitev: 1.220520
+
 
 % 2)
 nal(2)
@@ -25,6 +27,8 @@ d = @(t) vecnorm(odvod(t));  % če bi uporabili norm, potem bi bil problem, saj
 
 fprintf("Dolžina krivulje: %f \n", integral(d, 0, 4*pi));
 % opomba: funkcija 'integral' bo klicala funkcijo z vektorjem vrednosti
+
+% dobljena rešitev: 16.000000
 
 
 % 3)
@@ -45,6 +49,8 @@ ploscina_pod_zanko = integral(integrand, ...
     0, 4*pi) / 2;
 
 fprintf("Ploščina zanke: %f \n", ploscina_pod_zanko);
+
+% dobljena rešitev: 18.849556
 
 
 % 4)
@@ -68,6 +74,8 @@ ukrivljenost = @(t) planaren_vekt_prod(odvod(t), drugi_odvod(t))/norm(odvod(t))^
 
 fprintf("Ukrivljenost (z vektorskim produktom): %f \n", ukrivljenost(2*pi));
 
+% dobljena rešitev: 0.375000 
+
 
 % 5)
 nal(5)
@@ -83,8 +91,8 @@ nicla2 = fzero(razdalja, [2*pi, 4*pi]);
 presecisce1 = c(nicla1);
 presecisce2 = c(nicla2);
 
-fprintf("Prvo presečišče: [%s] \n", join(string(presecisce1), ', '))
-fprintf("Drugo presečišče: [%s] \n", join(string(presecisce2), ', '))
+fprintf("Prvo presečišče: [%s] \n", join(string(presecisce1), ', '))  % pride [-2.0398, 2.0398] 
+fprintf("Drugo presečišče: [%s] \n", join(string(presecisce2), ', '))  % pride [1.3975, -1.3975]
 
 
 % 6)
@@ -112,11 +120,11 @@ presecisce = presecisce_dveh_krivulj(c, c_2, [0, 0], [b1, b2], [0.1*(b1); 0.7*(b
 drugo_presecisce = presecisce_dveh_krivulj(c, c_2, [0, 0], [b1, b2], [0.9*(b1); 0.7*(b2)]);
 
 % alternativno:
-% presecisce = presecisce_dveh_krivulj_fsolve(c, c_2, [0, 0], [b1, b2], [0.1*(b1); 0.7*(b2)]);
-% drugo_presecisce = presecisce_dveh_krivulj_fsolve(c, c_2, [0, 0], [b1, b2], [0.9*(b1); 0.7*(b2)]);
+presecisce = presecisce_dveh_krivulj_fsolve(c, c_2, [0, 0], [b1, b2], [0.1*(b1); 0.7*(b2)]);
+drugo_presecisce = presecisce_dveh_krivulj_fsolve(c, c_2, [0, 0], [b1, b2], [0.9*(b1); 0.7*(b2)]);
 
-fprintf("Prvo presečišče: [%s] \n", join(string(presecisce), ', '))
-fprintf("Drugo presečišče: [%s] \n", join(string(drugo_presecisce), ', '))
+fprintf("Prvo presečišče: [%s] \n", join(string(presecisce), ', '))  % pride [1.4976, 0.78683]
+fprintf("Drugo presečišče: [%s] \n", join(string(drugo_presecisce), ', '))  % pride [1.4269, -0.44625]
 
 
 % 7)
@@ -125,8 +133,9 @@ nal(7)
 nicla1 = fzero(y_odvod, [0.0000001, 2*pi]);
 nicla2 = fzero(y_odvod, [2*pi, 4*pi - 0.0000001]);
 
-fprintf("Prva vrednost: %f \n", nicla1)
-fprintf("Druga vrednost: %f \n", nicla2)
+fprintf("Prva vrednost: %f \n", nicla1)  % pride 4.188790 
+fprintf("Druga vrednost: %f \n", nicla2)  % pride 8.377580
+
 
 
 % 8) fminbnd  (analogno fzero)
@@ -141,6 +150,8 @@ razd = @(t) sqrt((A(1) - pridobi_element(c(t), 1, 1))^2 + (A(2) - pridobi_elemen
 t_min_razdalja = fminbnd(razd, 0, 4*pi);
 fprintf("Najmanjša razdalja do točke A(2, 2) je %f. \n", razd(t_min_razdalja))
 % lahko pa tut tk, da iščemo, kdaj velja <F^.(t), A - F(t)> = 0
+
+% dobljena rešitev: 0.803918
 
 
 % 9) fminsearch  (analogno fsolve)
@@ -168,6 +179,8 @@ funkcional = @(alfa) integralj(alfa) + dolzina(alfa);
 
 alfa = fminsearch(funkcional, -1/2);
 fprintf("Optimalen alfa je: %f \n", alfa)
+
+% rešitev: 0.000000
 
 
 % risanje:
