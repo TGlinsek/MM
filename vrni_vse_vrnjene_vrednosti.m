@@ -2,7 +2,8 @@ function [rez] = vrni_vse_vrnjene_vrednosti(varargin)
     % prvi argument je funkcija (function handle), ostali argumenti so njeni parametri
     % vrne celično tabelo vrnjenih vrednosti
 
-    % lahko je tudi prvi argument indeks, katero vrnjeno vrednost vrniti
+    % lahko je tudi prvi argument indeks (ali pa celo seznam indeksov), 
+    % katero vrnjeno vrednost vrniti.
     % v tem primeru je drugi argument funkcija, ostali pa njeni argumenti
 
     % TODO: prvi argument je lahko tudi seznam indeksov
@@ -11,6 +12,9 @@ function [rez] = vrni_vse_vrnjene_vrednosti(varargin)
 
     if isa(varargin{1}, 'double')
         f = varargin{2};
+        if ~isa(f, 'function_handle')
+            throw(MException("", "Če prvi parameter ni oblike function_handle, potem mora tega tipa biti drugi parameter (%d).", f))
+        end
         celice = cell(1, nargout(f));
         [celice{:}] = f(varargin{3:end});
         
@@ -22,6 +26,9 @@ function [rez] = vrni_vse_vrnjene_vrednosti(varargin)
 
     else
         f = varargin{1};
+        if ~isa(f, 'function_handle')
+            throw(MException("", "Neustrezen prvi parameter! Prvi parameter (%d) mora biti ali tipa function_handle ali pa seznam števil (double).", f))
+        end
         celice = cell(1, nargout(f));
         [celice{:}] = f(varargin{2:end});
 

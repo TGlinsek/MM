@@ -11,9 +11,9 @@ function [vozlisca] = risi_veriznica(zac, L, M, risanje)
 
 
     W0 = [-1, -1];  % to je verjetno dober začetni približek za [u_0, v_0]
-    vozlisca = ver_uv(W0, zac, L, M);  % 2 x (n + 2) matrika
     
-    n = length(vozlisca) - 2;
+    vozlisca = ver_uv(W0, zac, L, M);  % 2 x (n + 2) matrika
+    n = size(vozlisca, 2) - 2;
 
     x_0 = zac(1, 1);
     x_n_1 = zac(1, 2);
@@ -21,17 +21,18 @@ function [vozlisca] = risi_veriznica(zac, L, M, risanje)
     y_n_1 = zac(2, 2);
 
     vozlisca;
-
+    
     if risanje
         hold on
-        for i = 1 : n + 2
+        plot(vozlisca(1, 1), vozlisca(2, 1), 'o', 'color', 'blue');
+        for i = 2 : n + 1
             plot(vozlisca(1, i), vozlisca(2, i), 'o', 'color', 'red');
         end
+        plot(vozlisca(1, n + 2), vozlisca(2, n + 2), 'o', 'color', 'blue');
         
         for i = 1 : n + 1
             line(vozlisca(1, i:i+1), vozlisca(2, i:i+1), 'color', 'green');
         end
     end
-
 end
 

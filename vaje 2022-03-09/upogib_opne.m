@@ -6,7 +6,9 @@ function [x] = upogib_opne(f, R, n)
     ekvidist_tocke = 0 : h : (n - 1)*h;  % [0, h, 2h, ..., nh]
     
     if isa(f, 'function_handle')
-        f_tocke = f(ekvidist_tocke);
+        f_tocke = razbijalec(f, ekvidist_tocke);  
+        % lahko tudi f_tocke = f(ekvidist_tocke)
+        % ampak ta crasha za npr. f = @(t) 1
     else
         f_tocke = f;
     end

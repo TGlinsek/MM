@@ -1,4 +1,4 @@
-function [y, y_] = feliks(g, ro_z, c_u, S, m, n, t_K, zacetna_visina, zacetna_hitrost, risanje)
+function [y, y_] = feliks(g, ro_z, c_u, S, m, n, t_K, zacetna_visina, zacetna_hitrost, ode_metoda, risanje, vrni_le_hitrost, vrni_end)
     % g(y) funkcija, g(0) je g na tleh
     % ro_z(y) funkcija, ro_z(0) je ro na tleh
     % c_u je konstanta: koeficient zračnega upora
@@ -21,13 +21,34 @@ function [y, y_] = feliks(g, ro_z, c_u, S, m, n, t_K, zacetna_visina, zacetna_hi
     if isa(ro_z, 'double')
         ro_z = @(y) ro_z;
     end
+    
+    if nargin < 13
+        vrni_end = false;
+    end
+
+    if nargin < 12
+        vrni_le_hitrost = false;
+    end
+    
+    if nargin < 11
+        risanje = false;
+    end
 
     if nargin < 10
-        risanje = false;
+        ode_metoda = @ode45;
     end
 
     nekonkreten_f = @(g, ro_z, c_u, S, m, y_) -g - (ro_z .* c_u .* S./(2.*m)).*y_.*abs(y_);
     f = @(t, y, y_) nekonkreten_f(g(y), ro_z(y), c_u, S, m, y_);
 
-    [y, y_] = resi_dif_2(f, t_0, t_K, n, zacetna_visina, zacetna_hitrost, risanje);
+    [y, y_] = resi_dif_2(f, t_0, t_K, n, zacetna_visina, zacetna_hitrost, ode_metoda, risanje);
+    
+    if vrni_le_hitrost
+        y = y_;
+    end
+
+    if vrni_end
+        y = y(end);
+        y_ = y_(end);
+    end
 end
