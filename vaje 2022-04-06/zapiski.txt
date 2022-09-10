@@ -1,0 +1,9 @@
+sqrt(1 + y'^2) je Jacobian pri računanju dolžine verižnice
+
+theta^* je premo sorazmerna s časom (ne pa z dolžino oz. položajem)
+T = (k/sqrt(2g)) * theta^*
+to dobimo iz tega, da velja T = (k/sqrt(2g)) * \int_0^{theta^*}dtheta
+
+čas potovanja po splošni krivulji:
+\int_a^b sqrt((1 + (y'(x))^2)/(-2gy(x)))dx
+to je najbolje numerično poračunati

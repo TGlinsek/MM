@@ -1,0 +1,26 @@
+p : I -> R^d
+
+predpostavimo, da p regularna
+regularna: odvod ni nikol 0
+
+reparametrizacija: J --g--> I --p--> R^d
+g mora bit bijekcija
+in g mora bit regularna
+
+količine, ki so odvisne od parametrizacije:
+- hitrost (toda smer hitrosti je ista)
+- pospešek (toda smer se lahko obrne)
+
+neodvisne:
+- pot/tir
+- enotski tangentni vektor, tj. enotska hitrost
+- ukrivljenost (fleksijska ukrivljenost): p^.(t) x p^..(t) / ||p^.(t)||^3
+kjer je to planarni vektorski produkt:
+
+Planarni vektorski produkt:
+a = [a1; a2]
+b = [b1; b2]
+a x b := a1b2 - a2b1
+
+pol je še recimo torzijska ukrivljenost, ampak tega ne bomo rabili
+
