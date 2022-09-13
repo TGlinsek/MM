@@ -34,5 +34,6 @@ function [vozlisca] = risi_veriznica(zac, L, M, risanje)
             line(vozlisca(1, i:i+1), vozlisca(2, i:i+1), 'color', 'green');
         end
     end
+    % axis equal  % da sta obe osi enaki pri risanju
 end
 

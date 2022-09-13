@@ -17,7 +17,7 @@ function vozlisca = ver_uv(W0, zac, L, M)
     mi = pomozna_spr(2:end - 1);  % seznam dolžine n
 
     ni = [0, cumsum(mi, 2)];  % seznam dolžine n + 1
-    w = @(u, v) v - u * ni;  % seznam dolžine n + 1
+    w = @(u, v) v - u * ni;  % vrne seznam dolžine n + 1
     
     U = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2)) - (x_n_1 - x_0);
     V = @(u, v) sum(L.*(1 + w(u, v).^2).^(-1/2).*w(u, v)) - (y_n_1 - y_0);
@@ -41,10 +41,10 @@ function vozlisca = ver_uv(W0, zac, L, M)
     U_in_V([u, v]);
 
     ksi = L./sqrt(1 + w(u, v).^2);  % seznam dolžine n + 1
-    ni = ksi.*w(u, v);
+    eta = ksi.*w(u, v);
     
     x = x_0 + [0, cumsum(ksi, 2)];
-    y = y_0 + [0, cumsum(ni, 2)];
+    y = y_0 + [0, cumsum(eta, 2)];
     
     if abs(y(end) - y_n_1) >= 0.001
         fprintf("Y-koordinata zadnjega vozlišča se ne ujema z dejansko! Namesto Newtonove metode raje uporabi kar fsolve.\n")

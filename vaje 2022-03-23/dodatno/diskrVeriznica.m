@@ -29,10 +29,10 @@ ni = [0, cumsum(mi, 2)];  % seznam dolžine n + 1
 w = @(u, v) v - u * ni;  % seznam dolžine n + 1
 
 ksi = L./sqrt(1 + w.^2);  % seznam dolžine n + 1
-ni = ksi.*w;
+eta = ksi.*w;
 
 x = x_0 + [0, cumsum(ksi, 2)];
-y = y_0 + [0, cumsum(ni, 2)];
+y = y_0 + [0, cumsum(eta, 2)];
 vozlisca = [x; y];
 
 
