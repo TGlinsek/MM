@@ -63,21 +63,21 @@ function x = dejanski_inverz(f, y, priblizek_x, pogoj_je_interval)
     
     % x = zeros(m_, n);  % nastavimo na nekaj, da ne povečuje seznama za vsako
     if m == 1 && m_ == 1
-        %{
+        
         for i = 1 : n
-            x(:, i) = fzero(@(x) f(x) - y(:, i), priblizek_x(:, i)');
+            x(:, i) = fzero(@(x) f(x) - y(:, i), priblizek_x(:, i)');% če je napaka tukaj, potem morda inverz v tej točki ne obstaja
+            % specifično, če je ta napaka "Function values at the interval
+            % endpoints must differ in sign.", potem inverz ne obstaja
         end
-        %}
-        x = razbijalec(@(y) fzero(@(x) f(x') - y, priblizek_x), y);  % če je napaka tukaj, potem morda inverz v tej točki ne obstaja
-        % specifično, če je ta napaka "Function values at the interval
-        % endpoints must differ in sign.", potem inverz ne obstaja
+        
+        % x = razbijalec(@(y) fzero(@(x) f(x') - y, priblizek_x), y);  % če je napaka tukaj, potem morda inverz v tej točki ne obstaja
+        % ne deluje, če priblizek_x seznam približkov
     else
-        %{
-        for i = 1 : n
-            x(:, i) = fsolve(@(x) f(x) - y(:, i), priblizek_x(:, i));
-        end
-        %}
         options = optimset('Display','off');
-        x = razbijalec(@(y) fsolve(@(x) f(x) - y, priblizek_x), y, options);
+        for i = 1 : n
+            x(:, i) = fsolve(@(x) f(x) - y(:, i), priblizek_x(:, i), options);
+        end
+        
+        % x = razbijalec(@(y) fsolve(@(x) f(x) - y, priblizek_x, options), y);
     end
 end
